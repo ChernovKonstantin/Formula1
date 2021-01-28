@@ -121,33 +121,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="yD4-iz-iDM" customClass="DropDown" customModule="iOSDropDown">
-                                <rect key="frame" x="69" y="54" width="110" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="THl-5d-CiL"/>
-                                    <constraint firstAttribute="width" constant="110" id="yjs-GY-O5U"/>
-                                </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedRowColor">
-                                        <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="arrowColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="rowBackgroundColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="checkMarkEnabled" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Rt-cA-HGp">
                                 <rect key="frame" x="0.0" y="94" width="375" height="524"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -193,68 +166,63 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9p-rt-gd2">
-                                <rect key="frame" x="200" y="59" width="75" height="24"/>
+                                <rect key="frame" x="179" y="59" width="75" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="1ld-Yh-WV8" customClass="DropDown" customModule="iOSDropDown">
-                                <rect key="frame" x="285" y="54" width="80" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5C-p1-SoR">
+                                <rect key="frame" x="74" y="54" width="90" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="D6y-Yg-9V0"/>
-                                    <constraint firstAttribute="width" constant="80" id="FBE-gc-6Va"/>
+                                    <constraint firstAttribute="width" constant="90" id="Ldp-Nn-eMj"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="rowBackgroundColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedRowColor">
-                                        <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="arrowColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="checkMarkEnabled" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
+                                <state key="normal" title="0000"/>
+                                <connections>
+                                    <action selector="yearPickerButton:" destination="SSz-x4-QPE" eventType="touchUpInside" id="aMJ-eJ-OiV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc9-6j-wmF">
+                                <rect key="frame" x="269" y="54" width="50" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="cPJ-mH-U6v"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="0"/>
+                                <connections>
+                                    <action selector="positionPickerButton:" destination="SSz-x4-QPE" eventType="touchUpInside" id="re5-mn-5an"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vha-U0-drz"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5Rt-cA-HGp" firstAttribute="top" secondItem="yD4-iz-iDM" secondAttribute="bottom" id="2cG-Ns-9X6"/>
-                            <constraint firstItem="E9p-rt-gd2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yD4-iz-iDM" secondAttribute="trailing" constant="15" id="4pX-Yt-dp2"/>
-                            <constraint firstItem="yD4-iz-iDM" firstAttribute="top" secondItem="vha-U0-drz" secondAttribute="top" constant="10" id="6gL-GZ-TJ6"/>
                             <constraint firstItem="5Rt-cA-HGp" firstAttribute="bottom" secondItem="vha-U0-drz" secondAttribute="bottom" id="8UT-PW-whm"/>
                             <constraint firstItem="ibh-uI-epw" firstAttribute="leading" secondItem="vha-U0-drz" secondAttribute="leading" constant="15" id="A8b-zi-znY"/>
-                            <constraint firstItem="1ld-Yh-WV8" firstAttribute="leading" secondItem="E9p-rt-gd2" secondAttribute="trailing" constant="10" id="FnJ-bx-f6R"/>
-                            <constraint firstItem="yD4-iz-iDM" firstAttribute="leading" secondItem="ibh-uI-epw" secondAttribute="trailing" constant="10" id="GAB-ki-0bu"/>
                             <constraint firstItem="5Rt-cA-HGp" firstAttribute="leading" secondItem="vha-U0-drz" secondAttribute="leading" id="LdL-GR-0Xt"/>
+                            <constraint firstItem="Qc9-6j-wmF" firstAttribute="leading" secondItem="E9p-rt-gd2" secondAttribute="trailing" constant="15" id="OkB-yo-W8n"/>
+                            <constraint firstItem="E9p-rt-gd2" firstAttribute="leading" secondItem="w5C-p1-SoR" secondAttribute="trailing" constant="15" id="T0K-iR-8NB"/>
+                            <constraint firstItem="Qc9-6j-wmF" firstAttribute="top" secondItem="vha-U0-drz" secondAttribute="top" constant="10" id="UzP-y0-YDv"/>
+                            <constraint firstItem="w5C-p1-SoR" firstAttribute="top" secondItem="vha-U0-drz" secondAttribute="top" constant="10" id="WSn-oU-633"/>
+                            <constraint firstItem="w5C-p1-SoR" firstAttribute="leading" secondItem="ibh-uI-epw" secondAttribute="trailing" constant="15" id="gMy-CJ-SiC"/>
                             <constraint firstItem="ibh-uI-epw" firstAttribute="top" secondItem="vha-U0-drz" secondAttribute="top" constant="15" id="iyy-nZ-yv6"/>
-                            <constraint firstItem="1ld-Yh-WV8" firstAttribute="top" secondItem="vha-U0-drz" secondAttribute="top" constant="10" id="ksz-Uk-sTv"/>
-                            <constraint firstItem="vha-U0-drz" firstAttribute="trailing" secondItem="1ld-Yh-WV8" secondAttribute="trailing" constant="10" id="ufs-ty-JeU"/>
+                            <constraint firstItem="5Rt-cA-HGp" firstAttribute="top" secondItem="ibh-uI-epw" secondAttribute="bottom" constant="11" id="kei-ph-fC5"/>
+                            <constraint firstItem="vha-U0-drz" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qc9-6j-wmF" secondAttribute="trailing" constant="20" id="qv1-71-bAd"/>
                             <constraint firstItem="E9p-rt-gd2" firstAttribute="top" secondItem="vha-U0-drz" secondAttribute="top" constant="15" id="vZu-Tw-LvP"/>
                             <constraint firstItem="5Rt-cA-HGp" firstAttribute="trailing" secondItem="vha-U0-drz" secondAttribute="trailing" id="yCo-1a-7Xu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="acb-94-3TF"/>
                     <connections>
-                        <outlet property="positionDropDown" destination="1ld-Yh-WV8" id="XoY-X2-w64"/>
+                        <outlet property="positionLabel" destination="Qc9-6j-wmF" id="aRP-mK-qqg"/>
                         <outlet property="tableView" destination="5Rt-cA-HGp" id="fup-BL-3a9"/>
-                        <outlet property="yearDropDown" destination="yD4-iz-iDM" id="Am0-V0-LJz"/>
+                        <outlet property="yearLabel" destination="w5C-p1-SoR" id="QcV-iz-Cry"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nrL-eo-HoI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1311" y="779"/>
+            <point key="canvasLocation" x="1309.5999999999999" y="778.56071964017997"/>
         </scene>
         <!--My Tab Bar Controller-->
         <scene sceneID="jAM-7T-Z5K">
@@ -395,7 +363,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9Sk-cM-xjg"/>
+        <segue reference="17z-AO-MbJ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="info.circle.fill" catalog="system" width="128" height="121"/>

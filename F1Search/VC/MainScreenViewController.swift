@@ -12,8 +12,9 @@ class MainScreenViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    
-    var search = Search()
+    var races = [Race]()
+    let search = Request()
+    let requestMaker: URLRequestable = URLRequestMaker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,28 +27,32 @@ class MainScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-        if search.isLodaing{HUD.show(.labeledProgress(title: "Lodaing...", subtitle: nil))}
+        if search.isLodaing { showHUD(for: .lodaing) }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
-        HUD.hide()
+        showHUD(for: .stopAnimating)
     }
     
     func performSearch(){
-        search.performSearchFor() { [weak self] success in
-            HUD.hide()
+        search.isLodaing = true
+        requestMaker.performSearchFor(request: search) { [weak self] (result: Result<SearchResult, RequestError>) in
             guard let weakSelf = self else {return}
-            if !success {
-                print("URL request Error")
-                HUD.flash(.labeledError(title: "Error during request", subtitle: nil), delay: 2.0)
+            switch result{
+            case .success(let data): weakSelf.races = data.responseData.table.races;
+                DispatchQueue.main.async {
+                    showHUD(for: .success)
+                    weakSelf.tableView.reloadData()
+                }
+            case .failure(let error): print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    showHUD(for: .urlFailure)
+                }
             }
-            if weakSelf.search.searchResults.isEmpty{
-                HUD.flash(.label("No data available"), delay: 2.0)
-            }
-            weakSelf.tableView.reloadData()
         }
+        search.isLodaing = false
     }
     
     // MARK: - Navigation
@@ -57,8 +62,8 @@ class MainScreenViewController: UIViewController {
         if segue.identifier == "Details"{
             let controller = segue.destination as! DetailsViewController
             controller.search.searchPosition = ""
-            controller.search.headerURL = search.searchResults[index].url
-            controller.search.category = search.searchResults[index].round
+            controller.search.detailScreenHeaderURL = races[index].url
+            controller.search.searchRaceRound = races[index].round
         }
     }
 }
@@ -67,20 +72,18 @@ class MainScreenViewController: UIViewController {
 extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return search.searchResults.count
+        return races.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WinnerCell", for: indexPath)
-        cell.textLabel?.text = search.searchResults[indexPath.row].resultArray.first?.fullName
-        cell.detailTextLabel?.text = search.searchResults[indexPath.row].raceName
-        cell.accessoryType = .disclosureIndicator
-        cell.tintColor = UIColor.red
+        cell.textLabel?.text = races[indexPath.row].resultArray.first?.fullName
+        cell.detailTextLabel?.text = races[indexPath.row].raceName
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if !search.searchResults.isEmpty{
-            return "Winners in  \(search.searchResults.first!.season) season"
+        if !races.isEmpty{
+            return "Winners in  \(races.first!.season) season"
         }else{
             return nil
         }
