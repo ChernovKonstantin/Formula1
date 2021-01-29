@@ -7,12 +7,12 @@
 
 import Foundation
 
-class ResponseArray: Codable {
+class Response: Codable {
     var limit = ""
     var total = ""
     var offset = ""
-    var table = RacesArray()
-    
+    var table = SeasonRaces()
+
     enum CodingKeys: String, CodingKey {
         case table = "RaceTable"
         case limit, total, offset

@@ -7,17 +7,16 @@
 
 import Foundation
 
-class Race: Codable{
+class Race: Codable {
     var url = ""
     var date = ""
     var season = ""
     var round = ""
     var raceName = ""
-    var resultArray = [RaceResultsArray]()
-    
+    var resultArray = [RaceResult]()
+
     enum CodingKeys: String, CodingKey {
         case resultArray = "Results"
         case raceName, round, season, date, url
     }
-    
 }

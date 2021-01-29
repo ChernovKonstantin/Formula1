@@ -8,5 +8,6 @@
 import Foundation
 
 protocol URLRequestable {
-    func performSearchFor<Response: Decodable>(request: Request, completion: @escaping (Result<Response, RequestError>) -> Void)
+    func performSearchFor<Response: Decodable>(request: Request,
+                                               completion: @escaping (Result<Response, RequestError>) -> Void)
 }

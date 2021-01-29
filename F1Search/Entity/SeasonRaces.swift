@@ -7,9 +7,9 @@
 
 import Foundation
 
-class RacesArray: Codable{
+class SeasonRaces: Codable {
     var races = [Race]()
-    
+
     enum CodingKeys: String, CodingKey {
         case races = "Races"
     }

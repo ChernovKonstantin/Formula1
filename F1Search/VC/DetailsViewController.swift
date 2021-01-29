@@ -15,7 +15,7 @@ class DetailsViewController: UIViewController {
     let requestMaker: URLRequestable = URLRequestMaker()
     
     @IBOutlet weak var headerText: UILabel!
-    @IBOutlet weak var headerDetailtext: UILabel!   
+    @IBOutlet weak var headerDetailtext: UILabel!
     @IBAction func showWikiForRace(_ sender: UIControl) {
         if let url = URL(string: search.detailScreenHeaderURL) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -31,9 +31,9 @@ class DetailsViewController: UIViewController {
         performSearch()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if search.isLodaing{HUD.show(.labeledProgress(title: "Lodaing...", subtitle: nil))}
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if search.isLoading { showHUD(for: .lodaing) }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -41,38 +41,37 @@ class DetailsViewController: UIViewController {
         HUD.hide()
     }
     
-    
-    func performSearch(){
-        search.isLodaing = true
+    func performSearch() {
+        search.isLoading = true
         requestMaker.performSearchFor(request: search) { [weak self] (result: Result<SearchResult, RequestError>) in
             guard let weakSelf = self else {return}
-            switch result{
-            case .success(let data): weakSelf.races = data.responseData.table.races;
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    weakSelf.races = data.responseData.table.races
                     showHUD(for: .success)
                     weakSelf.updateLabels()
                     weakSelf.tableView.reloadData()
-                }
-            case .failure(let error): print(error.localizedDescription)
-                DispatchQueue.main.async {
+                    
+                case .failure(let error): print(error.localizedDescription)
                     showHUD(for: .urlFailure)
                 }
             }
+            weakSelf.search.isLoading = false
         }
-        search.isLodaing = true
     }
     
-    private func updateLabels(){
+    private func updateLabels() {
         if let race = races.first?.raceName, let date = races.first?.date,
-           let round = races.first?.round{
-            headerText.text = search.searchYear + " - " + round
+           let round = races.first?.round {
+            headerText.text = "\(search.searchYear)" + " - " + round
             headerDetailtext.text = race + "  " + date
         }
     }
 }
 
 // MARK: - Table view delegate
-extension DetailsViewController: UITableViewDelegate, UITableViewDataSource{
+extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return races.first?.resultArray.count ?? 0
     }
@@ -89,7 +88,7 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let view = view as? UITableViewHeaderFooterView{
+        if let view = view as? UITableViewHeaderFooterView {
             view.contentView.backgroundColor = UIColor.black.withAlphaComponent(0.85)
             view.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
             view.textLabel?.textColor = UIColor.gray

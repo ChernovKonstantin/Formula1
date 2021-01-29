@@ -11,13 +11,13 @@
         <!--DetailScreen-->
         <scene sceneID="kVY-Fo-42R">
             <objects>
-                <viewController title="DetailScreen" modalPresentationStyle="fullScreen" id="DX6-3X-Rbb" customClass="DetailsViewController" customModule="F1Search" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsViewController" title="DetailScreen" modalPresentationStyle="fullScreen" id="DX6-3X-Rbb" customClass="DetailsViewController" customModule="F1Search" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Guo-IW-CQa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIx-Et-emb" customClass="UIControl">
-                                <rect key="frame" x="0.0" y="44" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StM-5h-IFF">
                                         <rect key="frame" x="20" y="15" width="0.0" height="0.0"/>
@@ -55,7 +55,7 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aIB-Rz-0OQ">
-                                <rect key="frame" x="20" y="124" width="355" height="494"/>
+                                <rect key="frame" x="20" y="80" width="355" height="587"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.99999600649999998" green="1" blue="1" alpha="0.6994286341" colorSpace="custom" customColorSpace="sRGB"/>
@@ -152,9 +152,6 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <segue destination="DX6-3X-Rbb" kind="show" identifier="CustomDetails" id="17z-AO-MbJ"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -166,15 +163,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9p-rt-gd2">
-                                <rect key="frame" x="179" y="59" width="75" height="24"/>
+                                <rect key="frame" x="149" y="59" width="75" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5C-p1-SoR">
-                                <rect key="frame" x="74" y="54" width="90" height="36"/>
+                                <rect key="frame" x="74" y="54" width="60" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="Ldp-Nn-eMj"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="pNU-pq-zcP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="0000"/>
@@ -183,7 +180,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc9-6j-wmF">
-                                <rect key="frame" x="269" y="54" width="50" height="36"/>
+                                <rect key="frame" x="239" y="54" width="50" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="cPJ-mH-U6v"/>
                                 </constraints>
@@ -286,9 +283,6 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <segue destination="DX6-3X-Rbb" kind="show" identifier="Details" id="9Sk-cM-xjg"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -362,9 +356,6 @@
             <point key="canvasLocation" x="625" y="779"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="17z-AO-MbJ"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="info.circle.fill" catalog="system" width="128" height="121"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>

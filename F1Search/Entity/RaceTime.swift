@@ -7,6 +7,6 @@
 
 import Foundation
 
-class RaceTime: Codable{
+class RaceTime: Codable {
     var time = ""
 }

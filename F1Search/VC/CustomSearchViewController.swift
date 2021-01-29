@@ -38,7 +38,11 @@ class CustomSearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-        if search.isLodaing { showHUD(for: .lodaing) }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if search.isLoading { showHUD(for: .lodaing) }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,30 +51,30 @@ class CustomSearchViewController: UIViewController {
         showHUD(for: .stopAnimating)
     }
     
-    private func performSearch(){
-        search.isLodaing = true
+    private func performSearch() {
+        search.isLoading = true
         showHUD(for: .lodaing)
         requestMaker.performSearchFor(request: search) { [weak self] (result: Result<SearchResult, RequestError>) in
             guard let weakSelf = self else {return}
-            switch result{
-            case .success(let data): weakSelf.races = data.responseData.table.races;
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    weakSelf.races = data.responseData.table.races
                     guard !weakSelf.races.isEmpty else {showHUD(for: .emptySearchResult)
                         weakSelf.tableView.isHidden = true; return
                     }
                     weakSelf.tableView.isHidden = false
                     showHUD(for: .success)
                     weakSelf.tableView.reloadData()
-                }
-            case .failure(let error): print(error.localizedDescription)
-                DispatchQueue.main.async {
+                    
+                case .failure(let error): print(error.localizedDescription)
                     showHUD(for: .urlFailure)
                 }
             }
+            weakSelf.search.isLoading = false
         }
-        search.isLodaing = false
     }
-    private func customizeDropDowns(){
+    private func customizeDropDowns() {
         yearLabel.setTitle("\(search.searchYear)", for: .normal)
         positionLabel.setTitle("\(search.searchPosition)", for: .normal)
         yearMenu.backgroundColor = .black
@@ -81,34 +85,21 @@ class CustomSearchViewController: UIViewController {
         positionMenu.anchorView = positionLabel
         yearMenu.dataSource = search.yearArr
         positionMenu.dataSource = search.positionArr
-        yearMenu.selectionAction = {[weak self] (index: Int, item: String) in
+        yearMenu.selectionAction = {[weak self] (_: Int, item: String) in
             self?.yearLabel.setTitle(item, for: .normal)
-            self?.search.searchYear = item
+            self?.search.searchYear = Int(item)!
             self?.performSearch()
         }
-        positionMenu.selectionAction = {[weak self] (index: Int, item: String) in
+        positionMenu.selectionAction = {[weak self] (_: Int, item: String) in
             self?.positionLabel.setTitle(item, for: .normal)
-            self?.search.searchPosition = item
+            self?.search.searchPosition = Int(item)!
             self?.performSearch()
-        }
-    }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
-        guard let index = tableView.indexPath(for: cell)?.row else {return}
-        if segue.identifier == "CustomDetails"{
-            let controller = segue.destination as! DetailsViewController
-            controller.search.searchYear = races[index].season
-            controller.search.searchPosition = ""
-            controller.search.detailScreenHeaderURL = races[index].url
-            controller.search.searchRaceRound = races[index].round
         }
     }
 }
 
 // MARK: - Table view delegate
-extension CustomSearchViewController: UITableViewDelegate, UITableViewDataSource{
+extension CustomSearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return races.count
     }
@@ -122,5 +113,13 @@ extension CustomSearchViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if let controller  = storyboard!.instantiateViewController(identifier: "DetailsViewController")
+            as? DetailsViewController {
+            controller.search.searchYear = Int(races[indexPath.row].season) ?? 2020
+            controller.search.searchPosition = -1
+            controller.search.detailScreenHeaderURL = races[indexPath.row].url
+            controller.search.searchRaceRound = Int(races[indexPath.row].round) ?? -1
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }

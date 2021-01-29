@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DriverInfo: Codable{
+class Driver: Codable {
     var givenName = ""
     var familyName = ""
     var url = ""

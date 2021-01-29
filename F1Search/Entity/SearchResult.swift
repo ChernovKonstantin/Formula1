@@ -7,9 +7,9 @@
 
 import Foundation
 
-class SearchResult: Codable{
-    var responseData = ResponseArray()
-    
+class SearchResult: Codable {
+    var responseData = Response()
+
     enum CodingKeys: String, CodingKey {
         case responseData = "MRData"
     }

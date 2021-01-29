@@ -8,7 +8,7 @@
 import Foundation
 import PKHUD
 
-enum HUDOptions{
+enum HUDOptions {
     case stopAnimating
     case lodaing
     case success
@@ -17,7 +17,7 @@ enum HUDOptions{
     case incorrectInput
 }
 
-func showHUD(for hud: HUDOptions){
+func showHUD(for hud: HUDOptions) {
     switch hud {
     case .success: HUD.flash(.labeledSuccess(title: "Success", subtitle: nil), delay: 1.0)
     case .urlFailure: HUD.flash(.labeledError(title: "Error during request", subtitle: nil), delay: 2.0)

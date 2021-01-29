@@ -7,15 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17331EF225BB5C0D0063748D /* ResponseArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331EF125BB5C0D0063748D /* ResponseArray.swift */; };
-		17331EF525BB5C210063748D /* RacesArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331EF425BB5C210063748D /* RacesArray.swift */; };
+		17331EF225BB5C0D0063748D /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331EF125BB5C0D0063748D /* Response.swift */; };
+		17331EF525BB5C210063748D /* SeasonRaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331EF425BB5C210063748D /* SeasonRaces.swift */; };
 		17331EF825BB5C4A0063748D /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331EF725BB5C4A0063748D /* Race.swift */; };
-		17331EFB25BB5C640063748D /* RaceResultsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331EFA25BB5C640063748D /* RaceResultsArray.swift */; };
+		17331EFB25BB5C640063748D /* RaceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331EFA25BB5C640063748D /* RaceResult.swift */; };
 		17331EFE25BB5C800063748D /* RaceTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331EFD25BB5C800063748D /* RaceTime.swift */; };
-		17331F0125BB5C8B0063748D /* DriverInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331F0025BB5C8B0063748D /* DriverInfo.swift */; };
+		17331F0125BB5C8B0063748D /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17331F0025BB5C8B0063748D /* Driver.swift */; };
 		173C79B825B6E9C200657E6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C79B725B6E9C200657E6A /* AppDelegate.swift */; };
 		173C79BA25B6E9C200657E6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C79B925B6E9C200657E6A /* SceneDelegate.swift */; };
-		173C79BC25B6E9C200657E6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C79BB25B6E9C200657E6A /* ViewController.swift */; };
 		173C79BF25B6E9C200657E6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173C79BD25B6E9C200657E6A /* Main.storyboard */; };
 		173C79C125B6E9C400657E6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 173C79C025B6E9C400657E6A /* Assets.xcassets */; };
 		173C79C425B6E9C400657E6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173C79C225B6E9C400657E6A /* LaunchScreen.storyboard */; };
@@ -33,16 +32,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		17331EF125BB5C0D0063748D /* ResponseArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseArray.swift; sourceTree = "<group>"; };
-		17331EF425BB5C210063748D /* RacesArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RacesArray.swift; sourceTree = "<group>"; };
+		17331EF125BB5C0D0063748D /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		17331EF425BB5C210063748D /* SeasonRaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonRaces.swift; sourceTree = "<group>"; };
 		17331EF725BB5C4A0063748D /* Race.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
-		17331EFA25BB5C640063748D /* RaceResultsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceResultsArray.swift; sourceTree = "<group>"; };
+		17331EFA25BB5C640063748D /* RaceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceResult.swift; sourceTree = "<group>"; };
 		17331EFD25BB5C800063748D /* RaceTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTime.swift; sourceTree = "<group>"; };
-		17331F0025BB5C8B0063748D /* DriverInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverInfo.swift; sourceTree = "<group>"; };
+		17331F0025BB5C8B0063748D /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		173C79B425B6E9C200657E6A /* F1Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = F1Search.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		173C79B725B6E9C200657E6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		173C79B925B6E9C200657E6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		173C79BB25B6E9C200657E6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		173C79BE25B6E9C200657E6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		173C79C025B6E9C400657E6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		173C79C325B6E9C400657E6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -78,12 +76,12 @@
 			isa = PBXGroup;
 			children = (
 				173C79D525B7196100657E6A /* SearchResult.swift */,
-				17331F0025BB5C8B0063748D /* DriverInfo.swift */,
+				17331F0025BB5C8B0063748D /* Driver.swift */,
 				17331EFD25BB5C800063748D /* RaceTime.swift */,
-				17331EFA25BB5C640063748D /* RaceResultsArray.swift */,
+				17331EFA25BB5C640063748D /* RaceResult.swift */,
 				17331EF725BB5C4A0063748D /* Race.swift */,
-				17331EF425BB5C210063748D /* RacesArray.swift */,
-				17331EF125BB5C0D0063748D /* ResponseArray.swift */,
+				17331EF425BB5C210063748D /* SeasonRaces.swift */,
+				17331EF125BB5C0D0063748D /* Response.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -128,7 +126,6 @@
 			children = (
 				173C79B725B6E9C200657E6A /* AppDelegate.swift */,
 				173C79B925B6E9C200657E6A /* SceneDelegate.swift */,
-				173C79BB25B6E9C200657E6A /* ViewController.swift */,
 				173C79C225B6E9C400657E6A /* LaunchScreen.storyboard */,
 			);
 			path = general;
@@ -183,6 +180,7 @@
 				173C79B125B6E9C200657E6A /* Frameworks */,
 				173C79B225B6E9C200657E6A /* Resources */,
 				B87CF01EAE12BD58A9DE73AA /* [CP] Embed Pods Frameworks */,
+				175AEEC025C418CE0068B63B /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -239,6 +237,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		175AEEC025C418CE0068B63B /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		4B427408DE0793316CF60982 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -288,9 +304,8 @@
 				175213DB25C16AA40044385E /* RequestError.swift in Sources */,
 				175213D825C169BB0044385E /* URLRequestable.swift in Sources */,
 				17331EF825BB5C4A0063748D /* Race.swift in Sources */,
-				17331EF525BB5C210063748D /* RacesArray.swift in Sources */,
-				173C79BC25B6E9C200657E6A /* ViewController.swift in Sources */,
-				17331EF225BB5C0D0063748D /* ResponseArray.swift in Sources */,
+				17331EF525BB5C210063748D /* SeasonRaces.swift in Sources */,
+				17331EF225BB5C0D0063748D /* Response.swift in Sources */,
 				173C79DE25B7452000657E6A /* CustomSearchViewController.swift in Sources */,
 				173C79F125B86C4A00657E6A /* DetailsViewController.swift in Sources */,
 				173C79CE25B6FF9B00657E6A /* MainScreenViewController.swift in Sources */,
@@ -298,9 +313,9 @@
 				175213E625C174990044385E /* URLRequestMaker.swift in Sources */,
 				175213EA25C17AF30044385E /* FunctionsHUD.swift in Sources */,
 				173C79B825B6E9C200657E6A /* AppDelegate.swift in Sources */,
-				17331EFB25BB5C640063748D /* RaceResultsArray.swift in Sources */,
+				17331EFB25BB5C640063748D /* RaceResult.swift in Sources */,
 				173C79D625B7196100657E6A /* SearchResult.swift in Sources */,
-				17331F0125BB5C8B0063748D /* DriverInfo.swift in Sources */,
+				17331F0125BB5C8B0063748D /* Driver.swift in Sources */,
 				17331EFE25BB5C800063748D /* RaceTime.swift in Sources */,
 				173C79BA25B6E9C200657E6A /* SceneDelegate.swift in Sources */,
 				17CC658625C01AC900FACE56 /* MyTabBarController.swift in Sources */,
@@ -453,6 +468,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = F1Search/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -472,6 +488,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = F1Search/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

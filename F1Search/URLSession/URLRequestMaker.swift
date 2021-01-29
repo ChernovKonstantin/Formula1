@@ -7,27 +7,25 @@
 
 import Foundation
 
-class URLRequestMaker: URLRequestable{
+class URLRequestMaker: URLRequestable {
     
     private var dataTask: URLSessionDataTask?
     private let decoder = JSONDecoder()
     
-    func performSearchFor<Response>(request: Request, completion: @escaping (Result<Response, RequestError>) -> ()) where Response : Decodable {
+    func performSearchFor<Response: Decodable>(request: Request,
+                                               completion: @escaping (Result<Response, RequestError>) -> Void) {
         dataTask?.cancel()
         let url = setUrlFor(request: request)
         print(url)
-        dataTask = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            defer {
-                self?.dataTask = nil
-            }
-            if let error = error as NSError?, error.code == -999 {
-                return
-            }
+        dataTask = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             guard let weakSelf = self else { return }
-            switch (data, error){
+            switch (data, error) {
             case let (_, error?):
+                if let error = error as NSError?, error.code == -999 {
+                    return
+                }
                 completion(.failure(.invalidRequestError(error)))
-            case let (data?, .none):
+            case let (data?, _):
                 do {
                     let decodedData = try weakSelf.decoder.decode(Response.self, from: data)
                     completion(.success(decodedData))
@@ -41,16 +39,15 @@ class URLRequestMaker: URLRequestable{
         dataTask?.resume()
     }
     
-    private func setUrlFor (request: Request) -> URL{
-        var positionFinished = ""
-        var kind = ""
-        if !request.searchPosition.isEmpty{
-            positionFinished = "/" + request.searchPosition
+    private func setUrlFor (request: Request) -> URL {
+        var urlParts: [String] = ["\(request.searchYear)"]
+        if request.searchRaceRound != -1 {
+            urlParts.append("\(request.searchRaceRound)")
         }
-        if !request.searchRaceRound.isEmpty{
-            kind = "/" + request.searchRaceRound
+        urlParts.append("results")
+        if request.searchPosition != -1 {
+            urlParts.append("\(request.searchPosition)")
         }
-        let date = request.searchYear
-        return URL(string: "http://ergast.com/api/f1/\(date)\(kind)/results\(positionFinished).json")!
+        return URL(string: "http://ergast.com/api/f1/\(urlParts.joined(separator: "/")).json")!
     }
 }
