@@ -11,8 +11,8 @@ import PKHUD
 
 class CustomSearchViewController: UIViewController {
     
-    var races = [Race]()
     let search = Request()
+    var dataSource = DataSourceHandler()
     let requestMaker: URLRequestable = URLRequestMaker()
     let yearMenu = DropDown()
     let positionMenu = DropDown()
@@ -30,7 +30,7 @@ class CustomSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = dataSource
         customizeDropDowns()
         performSearch()
     }
@@ -59,8 +59,8 @@ class CustomSearchViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
-                    weakSelf.races = data.responseData.table.races
-                    guard !weakSelf.races.isEmpty else {showHUD(for: .emptySearchResult)
+                    weakSelf.dataSource.races = data.responseData.table.races
+                    guard !weakSelf.dataSource.races.isEmpty else {showHUD(for: .emptySearchResult)
                         weakSelf.tableView.isHidden = true; return
                     }
                     weakSelf.tableView.isHidden = false
@@ -99,26 +99,16 @@ class CustomSearchViewController: UIViewController {
 }
 
 // MARK: - Table view delegate
-extension CustomSearchViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return races.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomSearchCell", for: indexPath)
-        cell.textLabel?.text = races[indexPath.row].resultArray.first?.fullName
-        cell.detailTextLabel?.text = races[indexPath.row].raceName
-        return cell
-    }
+extension CustomSearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if let controller  = storyboard!.instantiateViewController(identifier: "DetailsViewController")
             as? DetailsViewController {
-            controller.search.searchYear = Int(races[indexPath.row].season) ?? 2020
+            controller.search.searchYear = Int(dataSource.races[indexPath.row].season) ?? 2020
             controller.search.searchPosition = -1
-            controller.search.detailScreenHeaderURL = races[indexPath.row].url
-            controller.search.searchRaceRound = Int(races[indexPath.row].round) ?? -1
+            controller.search.detailScreenHeaderURL = dataSource.races[indexPath.row].url
+            controller.search.searchRaceRound = Int(dataSource.races[indexPath.row].round) ?? -1
             navigationController?.pushViewController(controller, animated: true)
         }
     }

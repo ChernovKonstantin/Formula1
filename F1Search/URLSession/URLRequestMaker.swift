@@ -16,7 +16,6 @@ class URLRequestMaker: URLRequestable {
                                                completion: @escaping (Result<Response, RequestError>) -> Void) {
         dataTask?.cancel()
         let url = setUrlFor(request: request)
-        print(url)
         dataTask = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             guard let weakSelf = self else { return }
             switch (data, error) {

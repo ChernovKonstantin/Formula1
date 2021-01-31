@@ -12,14 +12,14 @@ class MainScreenViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var races = [Race]()
     let search = Request()
+    var dataSource = DataSourceHandler()
     let requestMaker: URLRequestable = URLRequestMaker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = dataSource
         performSearch()
     }
     
@@ -46,7 +46,7 @@ class MainScreenViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
-                    weakSelf.races = data.responseData.table.races
+                    weakSelf.dataSource.races = data.responseData.table.races
                     showHUD(for: .success)
                     weakSelf.tableView.reloadData()
                 case .failure(let error):
@@ -60,25 +60,7 @@ class MainScreenViewController: UIViewController {
 }
 
 // MARK: - Table view delegate
-extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return races.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WinnerCell", for: indexPath)
-        cell.textLabel?.text = races[indexPath.row].resultArray.first?.fullName
-        cell.detailTextLabel?.text = races[indexPath.row].raceName
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if !races.isEmpty {
-            return "Winners in  \(races.first!.season) season"
-        } else {
-            return nil
-        }
-    }
+extension MainScreenViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let view = view as? UITableViewHeaderFooterView {
@@ -93,8 +75,8 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
         if let controller  = storyboard!.instantiateViewController(identifier: "DetailsViewController")
             as? DetailsViewController {
             controller.search.searchPosition = -1
-            controller.search.detailScreenHeaderURL = races[indexPath.row].url
-            controller.search.searchRaceRound = Int(races[indexPath.row].round) ?? -1
+            controller.search.detailScreenHeaderURL = dataSource.races[indexPath.row].url
+            controller.search.searchRaceRound = Int(dataSource.races[indexPath.row].round) ?? -1
             navigationController?.pushViewController(controller, animated: true)
         }
     }

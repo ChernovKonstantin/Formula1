@@ -14,7 +14,6 @@ enum HUDOptions {
     case success
     case urlFailure
     case emptySearchResult
-    case incorrectInput
 }
 
 func showHUD(for hud: HUDOptions) {
@@ -22,8 +21,7 @@ func showHUD(for hud: HUDOptions) {
     case .success: HUD.flash(.labeledSuccess(title: "Success", subtitle: nil), delay: 1.0)
     case .urlFailure: HUD.flash(.labeledError(title: "Error during request", subtitle: nil), delay: 2.0)
     case .emptySearchResult: HUD.flash(.label("No data available"), delay: 2.0)
-    case .lodaing: HUD.show(.labeledProgress(title: "Lodaing...", subtitle: nil))
+    case .lodaing: HUD.show(.labeledProgress(title: "Loading...", subtitle: nil))
     case .stopAnimating: HUD.hide()
-    case .incorrectInput: HUD.flash(.label("Incorrect input. Please choose data from the list"), delay: 2.0)
     }
 }

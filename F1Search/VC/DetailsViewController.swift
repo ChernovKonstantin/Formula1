@@ -10,7 +10,7 @@ import PKHUD
 
 class DetailsViewController: UIViewController {
     
-    var races = [Race]()
+    var dataSource = DataSourceHandler()
     let search = Request()
     let requestMaker: URLRequestable = URLRequestMaker()
     
@@ -27,7 +27,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = dataSource
         performSearch()
     }
     
@@ -48,7 +48,7 @@ class DetailsViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
-                    weakSelf.races = data.responseData.table.races
+                    weakSelf.dataSource.races = data.responseData.table.races
                     showHUD(for: .success)
                     weakSelf.updateLabels()
                     weakSelf.tableView.reloadData()
@@ -62,8 +62,8 @@ class DetailsViewController: UIViewController {
     }
     
     private func updateLabels() {
-        if let race = races.first?.raceName, let date = races.first?.date,
-           let round = races.first?.round {
+        if let race = dataSource.races.first?.raceName, let date = dataSource.races.first?.date,
+           let round = dataSource.races.first?.round {
             headerText.text = "\(search.searchYear)" + " - " + round
             headerDetailtext.text = race + "  " + date
         }
@@ -71,21 +71,7 @@ class DetailsViewController: UIViewController {
 }
 
 // MARK: - Table view delegate
-extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return races.first?.resultArray.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Results:"
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = races.first?.resultArray[indexPath.row].fullName
-        cell.detailTextLabel?.text = races.first?.resultArray[indexPath.row].timeResult?.time ?? "No race time"
-        return cell
-    }
+extension DetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let view = view as? UITableViewHeaderFooterView {
@@ -97,7 +83,7 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let url = URL(string: (races.first?.resultArray[indexPath.row].driver.url)!) {
+        if let url = URL(string: (dataSource.races.first?.resultArray[indexPath.row].driver.url)!) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }

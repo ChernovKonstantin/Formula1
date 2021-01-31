@@ -27,6 +27,7 @@
 		175213DB25C16AA40044385E /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175213DA25C16AA40044385E /* RequestError.swift */; };
 		175213E625C174990044385E /* URLRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175213E525C174990044385E /* URLRequestMaker.swift */; };
 		175213EA25C17AF30044385E /* FunctionsHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175213E925C17AF30044385E /* FunctionsHUD.swift */; };
+		1762BD3825C49A6E005FDCED /* DataSourceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762BD3725C49A6E005FDCED /* DataSourceHandler.swift */; };
 		17CC658625C01AC900FACE56 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CC658525C01AC900FACE56 /* MyTabBarController.swift */; };
 		1FFFFCBDC225B65BECB3CAAD /* Pods_F1Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F44366BAE8F9AC23BBD5CE1B /* Pods_F1Search.framework */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		175213DA25C16AA40044385E /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		175213E525C174990044385E /* URLRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestMaker.swift; sourceTree = "<group>"; };
 		175213E925C17AF30044385E /* FunctionsHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionsHUD.swift; sourceTree = "<group>"; };
+		1762BD3725C49A6E005FDCED /* DataSourceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceHandler.swift; sourceTree = "<group>"; };
 		17CC658525C01AC900FACE56 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		A97FDB445DE70A877A428BE2 /* Pods-F1Search.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-F1Search.debug.xcconfig"; path = "Target Support Files/Pods-F1Search/Pods-F1Search.debug.xcconfig"; sourceTree = "<group>"; };
 		C3EC79A4AF7D2BD6921E5D15 /* Pods-F1Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-F1Search.release.xcconfig"; path = "Target Support Files/Pods-F1Search/Pods-F1Search.release.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				175213EC25C17DA00044385E /* URLSession */,
 				17331F0325BB5CA80063748D /* Entity */,
 				176BC19325C2C87600947850 /* VC */,
+				1762BD3725C49A6E005FDCED /* DataSourceHandler.swift */,
 				173C79D225B7189800657E6A /* Request.swift */,
 				175213E925C17AF30044385E /* FunctionsHUD.swift */,
 				17CC658525C01AC900FACE56 /* MyTabBarController.swift */,
@@ -310,6 +313,7 @@
 				173C79F125B86C4A00657E6A /* DetailsViewController.swift in Sources */,
 				173C79CE25B6FF9B00657E6A /* MainScreenViewController.swift in Sources */,
 				173C79D325B7189800657E6A /* Request.swift in Sources */,
+				1762BD3825C49A6E005FDCED /* DataSourceHandler.swift in Sources */,
 				175213E625C174990044385E /* URLRequestMaker.swift in Sources */,
 				175213EA25C17AF30044385E /* FunctionsHUD.swift in Sources */,
 				173C79B825B6E9C200657E6A /* AppDelegate.swift in Sources */,
