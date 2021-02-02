@@ -12,13 +12,35 @@ class MainScreenViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let search = Request()
-    var dataSource = DataSourceHandler()
-    let requestMaker: URLRequestable = URLRequestMaker()
+    private let search = Request()
+    private let requestMaker: URLRequestable = URLRequestMaker()
+    
+    private lazy var dataSource = GenericTableView(dataType: [Race](),
+                                           cellConfigure: {cell, race in
+                                            cell.textLabel?.text = race.resultArray.first?.fullName
+                                            cell.detailTextLabel?.text = race.raceName
+                                           },
+                                           sectionHeader: {
+                                            return "Winners in \(self.search.searchYear) season"
+                                           },
+                                           cellSelection: { [weak self] race in
+                                            guard let weakSelf = self else { return }
+                                            if let controller  = weakSelf.storyboard!.instantiateViewController(identifier: "DetailsViewController")
+                                                as? DetailsViewController {
+                                                controller.search.searchPosition = nil
+                                                if let url = race.url {
+                                                    controller.search.detailScreenHeaderURL = url
+                                                }
+                                                if let roundString = race.round, let round = Int(roundString) {
+                                                    controller.search.searchRaceRound = round
+                                                }
+                                                weakSelf.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                           })
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
+        tableView.delegate = dataSource
         tableView.dataSource = dataSource
         performSearch()
     }
@@ -39,14 +61,14 @@ class MainScreenViewController: UIViewController {
         showHUD(for: .stopAnimating)
     }
     
-    func performSearch() {
+    private func performSearch() {
         search.isLoading = true
         requestMaker.performSearchFor(request: search) { [weak self] (result: Result<SearchResult, RequestError>) in
             guard let weakSelf = self else {return}
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
-                    weakSelf.dataSource.races = data.responseData.table.races
+                    weakSelf.dataSource.data = data.responseData.table.races
                     showHUD(for: .success)
                     weakSelf.tableView.reloadData()
                 case .failure(let error):
@@ -55,29 +77,6 @@ class MainScreenViewController: UIViewController {
                 }
             }
             weakSelf.search.isLoading = false
-        }
-    }
-}
-
-// MARK: - Table view delegate
-extension MainScreenViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let view = view as? UITableViewHeaderFooterView {
-            view.contentView.backgroundColor = UIColor.black.withAlphaComponent(0.85)
-            view.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            view.textLabel?.textColor = UIColor.gray
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if let controller  = storyboard!.instantiateViewController(identifier: "DetailsViewController")
-            as? DetailsViewController {
-            controller.search.searchPosition = -1
-            controller.search.detailScreenHeaderURL = dataSource.races[indexPath.row].url
-            controller.search.searchRaceRound = Int(dataSource.races[indexPath.row].round) ?? -1
-            navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

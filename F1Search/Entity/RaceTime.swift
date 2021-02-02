@@ -8,5 +8,5 @@
 import Foundation
 
 class RaceTime: Codable {
-    var time = ""
+    var time: String?
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 class Response: Codable {
-    var limit = ""
-    var total = ""
-    var offset = ""
+    var limit: String?
+    var total: String?
+    var offset: String?
     var table = SeasonRaces()
 
     enum CodingKeys: String, CodingKey {

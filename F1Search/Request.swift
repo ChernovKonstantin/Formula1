@@ -11,9 +11,9 @@ class Request {
     
     // For 2020 year because 2021 has no entries
     var searchYear = Calendar.current.component(.year, from: Date()) - 1
-    var searchPosition = 1
-    var searchRaceRound = -1
-    var detailScreenHeaderURL = ""
+    var searchPosition: Int? = 1
+    var searchRaceRound: Int?
+    var detailScreenHeaderURL: String?
     var isLoading = true
     
     lazy private(set) var positionArr: [String] = {

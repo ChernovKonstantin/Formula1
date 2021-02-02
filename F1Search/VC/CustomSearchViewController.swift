@@ -11,11 +11,34 @@ import PKHUD
 
 class CustomSearchViewController: UIViewController {
     
-    let search = Request()
-    var dataSource = DataSourceHandler()
-    let requestMaker: URLRequestable = URLRequestMaker()
-    let yearMenu = DropDown()
-    let positionMenu = DropDown()
+    private let search = Request()
+    private lazy var dataSource = GenericTableView(dataType: [Race](),
+                                                   cellConfigure: { cell, race in
+                                                    cell.textLabel?.text = race.resultArray.first?.fullName
+                                                    cell.detailTextLabel?.text = race.raceName
+                                                   },
+                                                   sectionHeader: nil,
+                                                   cellSelection: { [weak self] race in
+                                                    guard let weakSelf = self else { return }
+                                                    if let controller  = weakSelf.storyboard!.instantiateViewController(identifier: "DetailsViewController")
+                                                        as? DetailsViewController {
+                                                        controller.search.searchPosition = nil
+                                                        if let seasonString = race.season, let season = Int(seasonString) {
+                                                            controller.search.searchYear = season
+                                                        }
+                                                        if let url = race.url {
+                                                            controller.search.detailScreenHeaderURL = url
+                                                        }
+                                                        if let roundString = race.round, let round = Int(roundString) {
+                                                            controller.search.searchRaceRound = round
+                                                        }
+                                                        weakSelf.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                   })
+    
+    private let requestMaker: URLRequestable = URLRequestMaker()
+    private let yearMenu = DropDown()
+    private let positionMenu = DropDown()
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var yearLabel: UIButton!
@@ -29,7 +52,7 @@ class CustomSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
+        tableView.delegate = dataSource
         tableView.dataSource = dataSource
         customizeDropDowns()
         performSearch()
@@ -59,14 +82,15 @@ class CustomSearchViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
-                    weakSelf.dataSource.races = data.responseData.table.races
-                    guard !weakSelf.dataSource.races.isEmpty else {showHUD(for: .emptySearchResult)
-                        weakSelf.tableView.isHidden = true; return
+                    if data.responseData.table.races.isEmpty {
+                        showHUD(for: .emptySearchResult)
+                        weakSelf.tableView.isHidden = true
+                    } else {
+                        showHUD(for: .success)
+                        weakSelf.dataSource.data = data.responseData.table.races
+                        weakSelf.tableView.reloadData()
+                        weakSelf.tableView.isHidden = false
                     }
-                    weakSelf.tableView.isHidden = false
-                    showHUD(for: .success)
-                    weakSelf.tableView.reloadData()
-                    
                 case .failure(let error): print(error.localizedDescription)
                     showHUD(for: .urlFailure)
                 }
@@ -76,7 +100,9 @@ class CustomSearchViewController: UIViewController {
     }
     private func customizeDropDowns() {
         yearLabel.setTitle("\(search.searchYear)", for: .normal)
-        positionLabel.setTitle("\(search.searchPosition)", for: .normal)
+        if let searchPosition = search.searchPosition {
+            positionLabel.setTitle("\(searchPosition)", for: .normal)
+        }
         yearMenu.backgroundColor = .black
         positionMenu.backgroundColor = .black
         yearMenu.textColor = .white
@@ -94,22 +120,6 @@ class CustomSearchViewController: UIViewController {
             self?.positionLabel.setTitle(item, for: .normal)
             self?.search.searchPosition = Int(item)!
             self?.performSearch()
-        }
-    }
-}
-
-// MARK: - Table view delegate
-extension CustomSearchViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if let controller  = storyboard!.instantiateViewController(identifier: "DetailsViewController")
-            as? DetailsViewController {
-            controller.search.searchYear = Int(dataSource.races[indexPath.row].season) ?? 2020
-            controller.search.searchPosition = -1
-            controller.search.detailScreenHeaderURL = dataSource.races[indexPath.row].url
-            controller.search.searchRaceRound = Int(dataSource.races[indexPath.row].round) ?? -1
-            navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

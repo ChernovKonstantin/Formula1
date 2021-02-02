@@ -8,17 +8,29 @@
 import Foundation
 
 class RaceResult: Codable {
-    var number = ""
+    var number: String?
     var driver = Driver()
     var timeResult: RaceTime?
-
+    
     enum CodingKeys: String, CodingKey {
         case driver = "Driver"
         case timeResult = "Time"
         case number
     }
-
+    
     var fullName: String {
-        return driver.givenName + " " + driver.familyName + " " + number
+        var name: [String] = [""]
+        if let givenName = driver.givenName {
+            name.append(givenName)
+        }
+        
+        if let familyName = driver.familyName {
+            name.append(familyName)
+        }
+        
+        if let number = number {
+            name.append(number)
+        }
+        return name.joined(separator: " ")
     }
 }

@@ -8,11 +8,11 @@
 import Foundation
 
 class Race: Codable {
-    var url = ""
-    var date = ""
-    var season = ""
-    var round = ""
-    var raceName = ""
+    var url: String?
+    var date: String?
+    var season: String?
+    var round: String?
+    var raceName: String?
     var resultArray = [RaceResult]()
 
     enum CodingKeys: String, CodingKey {

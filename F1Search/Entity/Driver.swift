@@ -8,7 +8,7 @@
 import Foundation
 
 class Driver: Codable {
-    var givenName = ""
-    var familyName = ""
-    var url = ""
+    var givenName: String?
+    var familyName: String?
+    var url: String?
 }

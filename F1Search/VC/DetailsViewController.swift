@@ -10,14 +10,27 @@ import PKHUD
 
 class DetailsViewController: UIViewController {
     
-    var dataSource = DataSourceHandler()
+    private lazy var dataSource = GenericTableView(dataType: [RaceResult](),
+                                           cellConfigure: {cell, race in
+                                            cell.textLabel?.text = race.fullName
+                                            cell.detailTextLabel?.text = race.timeResult?.time ?? "No race time"
+                                           },
+                                           sectionHeader: {
+                                            return "Results:"
+                                           },
+                                           cellSelection: { race in
+                                            if let url = URL(string: (race.driver.url)!) {
+                                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                            }
+                                           })
+    
     let search = Request()
-    let requestMaker: URLRequestable = URLRequestMaker()
+    private let requestMaker: URLRequestable = URLRequestMaker()
     
     @IBOutlet weak var headerText: UILabel!
     @IBOutlet weak var headerDetailtext: UILabel!
     @IBAction func showWikiForRace(_ sender: UIControl) {
-        if let url = URL(string: search.detailScreenHeaderURL) {
+        if let urlString = search.detailScreenHeaderURL, let url = URL(string: urlString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
@@ -26,7 +39,7 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
+        tableView.delegate = dataSource
         tableView.dataSource = dataSource
         performSearch()
     }
@@ -41,16 +54,16 @@ class DetailsViewController: UIViewController {
         HUD.hide()
     }
     
-    func performSearch() {
+    private func performSearch() {
         search.isLoading = true
         requestMaker.performSearchFor(request: search) { [weak self] (result: Result<SearchResult, RequestError>) in
             guard let weakSelf = self else {return}
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
-                    weakSelf.dataSource.races = data.responseData.table.races
+                    weakSelf.dataSource.data = (data.responseData.table.races.first?.resultArray)!
                     showHUD(for: .success)
-                    weakSelf.updateLabels()
+                    weakSelf.updateLabels(for: data.responseData.table.races.first!)
                     weakSelf.tableView.reloadData()
                     
                 case .failure(let error): print(error.localizedDescription)
@@ -61,30 +74,11 @@ class DetailsViewController: UIViewController {
         }
     }
     
-    private func updateLabels() {
-        if let race = dataSource.races.first?.raceName, let date = dataSource.races.first?.date,
-           let round = dataSource.races.first?.round {
+    private func updateLabels(for race: Race) {
+        if let raceName = race.raceName, let date = race.date,
+           let round = race.round {
             headerText.text = "\(search.searchYear)" + " - " + round
-            headerDetailtext.text = race + "  " + date
-        }
-    }
-}
-
-// MARK: - Table view delegate
-extension DetailsViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let view = view as? UITableViewHeaderFooterView {
-            view.contentView.backgroundColor = UIColor.black.withAlphaComponent(0.85)
-            view.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
-            view.textLabel?.textColor = UIColor.gray
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if let url = URL(string: (dataSource.races.first?.resultArray[indexPath.row].driver.url)!) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            headerDetailtext.text = raceName + "  " + date
         }
     }
 }
